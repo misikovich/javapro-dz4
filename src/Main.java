@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> dictionary = Arrays.asList("permission", "television", "meat", "confusion", "village", "media", "delivery", "cell", "judgment", "assumption", "session", "foundation", "connection", "celebration", "fishing");
+        final List<String> dictionary = Arrays.asList("permission", "television", "meat", "confusion", "village", "media", "delivery", "cell", "judgment", "assumption", "session", "foundation", "connection", "celebration", "fishing");
 
         countOccurance(getRandomList(dictionary, 20), getRandomWord(dictionary));
 
@@ -13,6 +13,7 @@ public class Main {
         System.out.println(findUnique(Arrays.asList(1, 2, 3, 1, 2, 7, 5, 2, 4, 2, 1, 4)));
 
         calcOccurance(getRandomList(dictionary, 10));
+        System.out.println(findOccurance(getRandomList(dictionary, 10)));
     }
 
     public static void countOccurance(List<String> strings, String string) {
@@ -62,24 +63,43 @@ public class Main {
         return unique;
     }
 
-    public static void calcOccurance(List<String> wordList) {
+    public static void calcOccurance(List<String> strings) {
         System.out.println("Calc Occurance");
-        if (wordList == null || wordList.isEmpty()) return;
+        if (strings == null || strings.isEmpty()) return;
 
-        Map<String, Integer> wordCount = new HashMap<>();
+        Map<String, Integer> count = new HashMap<>();
 
         //count words
-        for (String word : wordList) {
-            if (wordCount.containsKey(word)) wordCount.put(word, wordCount.get(word) + 1);
-            else wordCount.put(word, 1);
+        for (String word : strings) {
+            if (count.containsKey(word)) count.put(word, count.get(word) + 1);
+            else count.put(word, 1);
         }
 
         //print words
         System.out.println("'Word': 'repeats'");
-        for (Map.Entry<String, Integer> entry : wordCount.entrySet())
+        for (Map.Entry<String, Integer> entry : count.entrySet())
             System.out.printf("%s: %d%n", entry.getKey(), entry.getValue());
 
     }
 
+    public static ArrayList<Occurance> findOccurance(List<String> strings) {
+        System.out.println("Calc Occurance");
+        if (strings == null || strings.isEmpty()) return null;
 
+        Map<String, Integer> count = new HashMap<>();
+
+        //count words
+        for (String word : strings) {
+            if (count.containsKey(word)) count.put(word, count.get(word) + 1);
+            else count.put(word, 1);
+        }
+
+        ArrayList<Occurance> occurances = new ArrayList<>();
+
+        for (Map.Entry<String, Integer> entry : count.entrySet()) {
+            occurances.add(new Occurance(entry.getKey(), entry.getValue()));
+        }
+
+        return occurances;
+    }
 }
