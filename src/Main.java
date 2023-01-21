@@ -18,6 +18,7 @@ public class Main {
 
     public static void countOccurance(List<String> strings, String string) {
         System.out.println("Count Occurance");
+
         if (string == null || string.isEmpty()) {
             return;
         }
